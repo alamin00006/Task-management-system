@@ -26,17 +26,7 @@ __decorate([
 ], CreateTaskDto.prototype, "description", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsIn)(['Low', 'Medium', 'High']),
-    __metadata("design:type", String)
-], CreateTaskDto.prototype, "priority", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateTaskDto.prototype, "assigneeId", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateTaskDto.prototype, "dueDate", void 0);
 //# sourceMappingURL=create-task.dto.js.map

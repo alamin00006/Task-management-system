@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+
+import ThemeProviders from "./providers";
 import Providers from "@/redux/provider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "Task Flow — Admin Dashboard",
-  description: "Task Management System Admin Dashboard",
+  title: "Sera-gari Admin",
+  description: "Admin dashboard",
 };
 
 export default function RootLayout({
@@ -13,9 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ThemeProviders>
+            {children}
+            <Toaster position="top-right" reverseOrder={false} />
+          </ThemeProviders>
+        </Providers>
       </body>
     </html>
   );

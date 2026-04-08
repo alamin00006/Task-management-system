@@ -10,6 +10,7 @@ exports.AuditModule = void 0;
 const common_1 = require("@nestjs/common");
 const audit_service_1 = require("./audit.service");
 const audit_controller_1 = require("./audit.controller");
+const prisma_error_utils_1 = require("../prisma/prisma-error.utils");
 let AuditModule = class AuditModule {
 };
 exports.AuditModule = AuditModule;
@@ -17,7 +18,7 @@ exports.AuditModule = AuditModule = __decorate([
     (0, common_1.Global)(),
     (0, common_1.Module)({
         controllers: [audit_controller_1.AuditController],
-        providers: [audit_service_1.AuditService],
+        providers: [audit_service_1.AuditService, prisma_error_utils_1.PrismaErrorHandler],
         exports: [audit_service_1.AuditService],
     })
 ], AuditModule);

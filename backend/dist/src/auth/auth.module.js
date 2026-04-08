@@ -13,20 +13,21 @@ const passport_1 = require("@nestjs/passport");
 const auth_service_1 = require("./auth.service");
 const auth_controller_1 = require("./auth.controller");
 const jwt_strategy_1 = require("./jwt.strategy");
+const prisma_error_utils_1 = require("../prisma/prisma-error.utils");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
+            passport_1.PassportModule.register({ defaultStrategy: "jwt" }),
             jwt_1.JwtModule.register({
-                secret: process.env.JWT_SECRET || 'dev-secret-change-me',
-                signOptions: { expiresIn: '24h' },
+                secret: process.env.JWT_SECRET || "dev-secret-change-me",
+                signOptions: { expiresIn: "24h" },
             }),
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService, jwt_strategy_1.JwtStrategy],
+        providers: [auth_service_1.AuthService, jwt_strategy_1.JwtStrategy, prisma_error_utils_1.PrismaErrorHandler],
         exports: [auth_service_1.AuthService],
     })
 ], AuthModule);

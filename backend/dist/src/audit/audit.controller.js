@@ -8,33 +8,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuditController = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const client_1 = require("@prisma/client");
 const audit_service_1 = require("./audit.service");
+const pagination_dto_1 = require("../common/dto/pagination.dto");
 const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const roles_guard_1 = require("../common/guards/roles.guard");
 let AuditController = class AuditController {
     constructor(auditService) {
         this.auditService = auditService;
     }
-    async findAll() {
-        return this.auditService.findAll();
+    async findAll(paginationDto) {
+        return this.auditService.findAll(paginationDto);
     }
 };
 exports.AuditController = AuditController;
 __decorate([
     (0, common_1.Get)(),
     (0, roles_decorator_1.Roles)(client_1.Role.ADMIN),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [pagination_dto_1.PaginationDto]),
     __metadata("design:returntype", Promise)
 ], AuditController.prototype, "findAll", null);
 exports.AuditController = AuditController = __decorate([
-    (0, common_1.Controller)('audit-logs'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, common_1.Controller)("audit-logs"),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)("jwt"), roles_guard_1.RolesGuard),
     __metadata("design:paramtypes", [audit_service_1.AuditService])
 ], AuditController);
 //# sourceMappingURL=audit.controller.js.map

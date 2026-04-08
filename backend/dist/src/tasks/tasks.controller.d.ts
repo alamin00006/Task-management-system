@@ -1,28 +1,41 @@
-import { TasksService } from './tasks.service';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
+import { TasksService } from "./tasks.service";
+import { CreateTaskDto } from "./dto/create-task.dto";
+import { UpdateTaskDto } from "./dto/update-task.dto";
+import { PaginationDto } from "src/common/dto/pagination.dto";
 export declare class TasksController {
     private tasksService;
     constructor(tasksService: TasksService);
-    findAll(): Promise<{
-        id: any;
-        title: any;
-        description: any;
-        status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
-        createdAt: any;
-        createdBy: any;
-    }[]>;
+    findAll(paginationDto: PaginationDto): Promise<{
+        data: {
+            id: any;
+            title: any;
+            description: any;
+            status: any;
+            assignee: {
+                id: any;
+                name: any;
+                email: any;
+            } | null;
+            createdAt: any;
+            createdBy: any;
+        }[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
     findMyTasks(userId: string): Promise<{
         id: any;
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }[]>;
@@ -31,9 +44,11 @@ export declare class TasksController {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;
@@ -42,9 +57,11 @@ export declare class TasksController {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;
@@ -53,9 +70,11 @@ export declare class TasksController {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;
@@ -64,9 +83,11 @@ export declare class TasksController {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;

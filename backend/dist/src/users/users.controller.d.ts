@@ -1,11 +1,11 @@
-import { UsersService } from './users.service';
+import { UsersService } from "./users.service";
 export declare class UsersController {
     private usersService;
     constructor(usersService: UsersService);
     findAll(): Promise<{
         role: string;
         id: string;
-        email: string;
         name: string;
+        email: string;
     }[]>;
 }

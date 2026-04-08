@@ -54,12 +54,18 @@ let AuthService = class AuthService {
     }
     async login(email, password) {
         const user = await this.prisma.user.findUnique({ where: { email } });
-        if (!user)
-            throw new common_1.UnauthorizedException('Invalid credentials');
+        if (!user) {
+            throw new common_1.UnauthorizedException("Invalid credentials");
+        }
         const valid = await bcrypt.compare(password, user.password);
-        if (!valid)
-            throw new common_1.UnauthorizedException('Invalid credentials');
-        const payload = { sub: user.id, email: user.email, role: user.role };
+        if (!valid) {
+            throw new common_1.UnauthorizedException("Invalid credentials");
+        }
+        const payload = {
+            sub: user.id,
+            email: user.email,
+            role: user.role,
+        };
         const access_token = this.jwtService.sign(payload);
         return {
             access_token,
@@ -72,9 +78,12 @@ let AuthService = class AuthService {
         };
     }
     async getProfile(userId) {
-        const user = await this.prisma.user.findUnique({ where: { id: userId } });
-        if (!user)
-            throw new common_1.UnauthorizedException('User not found');
+        const user = await this.prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!user) {
+            throw new common_1.UnauthorizedException("User not found");
+        }
         return {
             id: user.id,
             name: user.name,

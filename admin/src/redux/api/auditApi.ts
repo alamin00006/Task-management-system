@@ -25,45 +25,13 @@ export type AuditResponse = {
   meta: AuditMeta;
 };
 
-export type AuditQueryParams = {
-  page?: number;
-  limit?: number;
-  search?: string;
-  sortBy?: string;
-  sortOrder?: "asc" | "desc";
-};
-
 export const auditApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getAuditLogs: build.query<AuditResponse, AuditQueryParams | void>({
-      query: (params) => {
-        const searchParams = new URLSearchParams();
-
-        if (params?.page) {
-          searchParams.append("page", String(params.page));
-        }
-
-        if (params?.limit) {
-          searchParams.append("limit", String(params.limit));
-        }
-
-        if (params?.search) {
-          searchParams.append("search", params.search);
-        }
-
-        if (params?.sortBy) {
-          searchParams.append("sortBy", params.sortBy);
-        }
-
-        if (params?.sortOrder) {
-          searchParams.append("sortOrder", params.sortOrder);
-        }
-
-        return {
-          url: `/audit-logs${searchParams.toString() ? `?${searchParams.toString()}` : ""}`,
-          method: "GET",
-        };
-      },
+    getAuditLogs: build.query<AuditResponse, { page: number; limit: number }>({
+      query: ({ page, limit }) => ({
+        url: `/audit-logs?page=${page}&limit=${limit}`,
+        method: "GET",
+      }),
       providesTags: ["Audit"],
     }),
   }),

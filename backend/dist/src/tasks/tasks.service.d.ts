@@ -1,30 +1,45 @@
-import { PrismaService } from '../prisma/prisma.service';
-import { AuditService } from '../audit/audit.service';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
+import { PrismaService } from "../prisma/prisma.service";
+import { PrismaErrorHandler } from "../prisma/prisma-error.utils";
+import { AuditService } from "../audit/audit.service";
+import { CreateTaskDto } from "./dto/create-task.dto";
+import { UpdateTaskDto } from "./dto/update-task.dto";
+import { PaginationDto } from "src/common/dto/pagination.dto";
 export declare class TasksService {
     private prisma;
     private auditService;
-    constructor(prisma: PrismaService, auditService: AuditService);
-    findAll(): Promise<{
-        id: any;
-        title: any;
-        description: any;
-        status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
-        createdAt: any;
-        createdBy: any;
-    }[]>;
+    private errorHandler;
+    constructor(prisma: PrismaService, auditService: AuditService, errorHandler: PrismaErrorHandler);
+    findAll(paginationDto: PaginationDto): Promise<{
+        data: {
+            id: any;
+            title: any;
+            description: any;
+            status: any;
+            assignee: {
+                id: any;
+                name: any;
+                email: any;
+            } | null;
+            createdAt: any;
+            createdBy: any;
+        }[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
     findByUser(userId: string): Promise<{
         id: any;
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }[]>;
@@ -33,9 +48,11 @@ export declare class TasksService {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;
@@ -44,9 +61,11 @@ export declare class TasksService {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;
@@ -55,9 +74,11 @@ export declare class TasksService {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;
@@ -66,9 +87,11 @@ export declare class TasksService {
         title: any;
         description: any;
         status: any;
-        priority: any;
-        assigneeId: any;
-        dueDate: any;
+        assignee: {
+            id: any;
+            name: any;
+            email: any;
+        } | null;
         createdAt: any;
         createdBy: any;
     }>;
