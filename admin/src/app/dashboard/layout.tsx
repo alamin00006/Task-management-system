@@ -1,8 +1,20 @@
 "use client";
+
+import { useEffect, useMemo, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { useAuth } from "@/contexts/AuthContext";
-import { LayoutDashboard, Plus, List, ScrollText, ClipboardList, LogOut, Menu } from "lucide-react";
-import { useState } from "react";
+import {
+  LayoutDashboard,
+  Plus,
+  List,
+  ScrollText,
+  ClipboardList,
+  LogOut,
+  Menu,
+  PanelLeftClose,
+  PanelLeftOpen,
+} from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
+import { logout } from "@/redux/authSlice";
 
 const adminItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -16,53 +28,145 @@ const userItems = [
   { title: "My Tasks", url: "/dashboard/my-tasks", icon: ClipboardList },
 ];
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { user, loading, logout } = useAuth();
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
+
+  const { user, token } = useAppSelector((state) => state.auth);
   const [collapsed, setCollapsed] = useState(false);
 
-  if (loading) return <div className="flex items-center justify-center min-h-screen text-foreground">Loading...</div>;
-  if (!user) { router.replace("/login"); return null; }
+  useEffect(() => {
+    if (!token) {
+      router.replace("/login");
+    }
+  }, [token, router]);
 
-  const items = user.role === "admin" ? adminItems : userItems;
+  const isAdmin = user?.role?.toLowerCase() === "admin";
 
-  const handleLogout = () => { logout(); router.push("/login"); };
+  const items = useMemo(() => {
+    return isAdmin ? adminItems : userItems;
+  }, [isAdmin]);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
+
+  if (!token) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background text-sm text-muted-foreground">
+        Loading...
+      </div>
+    );
+  }
 
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <aside className={`${collapsed ? "w-16" : "w-56"} flex flex-col border-r border-sidebar-border bg-sidebar transition-all duration-200`}>
-        <div className="flex items-center justify-between p-4">
-          {!collapsed && <span className="text-sm font-semibold text-sidebar-foreground">{user.role === "admin" ? "Admin Panel" : "User Panel"}</span>}
-          <button onClick={() => setCollapsed(!collapsed)} className="rounded p-1 text-sidebar-foreground hover:bg-sidebar-accent">
-            <Menu className="h-4 w-4" />
+    <div className="flex min-h-screen bg-background">
+      <aside
+        className={`${
+          collapsed ? "w-20" : "w-64"
+        } flex flex-col border-r border-border bg-card transition-all duration-200`}
+      >
+        <div className="flex h-16 items-center justify-between border-b border-border px-4">
+          {!collapsed ? (
+            <div>
+              <h2 className="text-base font-semibold text-foreground">
+                Task Flow
+              </h2>
+              <p className="text-xs text-muted-foreground">
+                {isAdmin ? "Admin Panel" : "User Panel"}
+              </p>
+            </div>
+          ) : (
+            <div className="text-sm font-semibold text-foreground">TF</div>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setCollapsed((prev) => !prev)}
+            className="rounded-md p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+          >
+            {collapsed ? (
+              <PanelLeftOpen className="h-4 w-4" />
+            ) : (
+              <PanelLeftClose className="h-4 w-4" />
+            )}
           </button>
         </div>
-        <nav className="flex-1 space-y-1 px-2">
+
+        <nav className="flex-1 space-y-1 p-3">
           {items.map((item) => {
-            const active = pathname === item.url;
+            const active =
+              pathname === item.url || pathname.startsWith(`${item.url}/`);
+
             return (
-              <button key={item.title} onClick={() => router.push(item.url)}
-                className={`flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${active ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" : "text-sidebar-foreground hover:bg-sidebar-accent/50"}`}>
+              <button
+                key={item.title}
+                type="button"
+                onClick={() => router.push(item.url)}
+                className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all ${
+                  active
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                }`}
+              >
                 <item.icon className="h-4 w-4 shrink-0" />
                 {!collapsed && <span>{item.title}</span>}
               </button>
             );
           })}
         </nav>
-        <div className="border-t border-sidebar-border p-3">
-          {!collapsed && user && <p className="mb-2 truncate text-xs text-muted-foreground">{user.name}</p>}
-          <button onClick={handleLogout}
-            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent/50">
-            <LogOut className="h-4 w-4" />
-            {!collapsed && "Logout"}
+
+        <div className="border-t border-border p-3">
+          <div
+            className={`mb-3 rounded-lg bg-muted/60 ${
+              collapsed ? "p-2 text-center" : "p-3"
+            }`}
+          >
+            {!collapsed ? (
+              <>
+                <p className="truncate text-sm font-medium text-foreground">
+                  {user?.name || "User"}
+                </p>
+                <p className="truncate text-xs text-muted-foreground">
+                  {user?.email}
+                </p>
+              </>
+            ) : (
+              <Menu className="mx-auto h-4 w-4 text-muted-foreground" />
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition hover:bg-destructive/10 hover:text-destructive"
+          >
+            <LogOut className="h-4 w-4 shrink-0" />
+            {!collapsed && <span>Logout</span>}
           </button>
         </div>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1 p-6">{children}</main>
+      <div className="flex min-h-screen flex-1 flex-col">
+        <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border bg-background/95 px-6 backdrop-blur">
+          <div>
+            <h1 className="text-lg font-semibold text-foreground">
+              {isAdmin ? "Admin Dashboard" : "User Dashboard"}
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              Welcome back{user?.name ? `, ${user.name}` : ""}
+            </p>
+          </div>
+        </header>
+
+        <main className="flex-1 p-6">{children}</main>
+      </div>
     </div>
   );
 }

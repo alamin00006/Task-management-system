@@ -1,6 +1,5 @@
 export type Role = "admin" | "user";
-export type TaskStatus = "To Do" | "In Progress" | "In Review" | "Done";
-export type TaskPriority = "Low" | "Medium" | "High";
+export type TaskStatus = "Pending" | "Processing" | "Done";
 
 export interface User {
   id: string;
@@ -14,7 +13,6 @@ export interface Task {
   title: string;
   description: string;
   status: TaskStatus;
-  priority: TaskPriority;
   assigneeId: string;
   dueDate: string;
   createdAt: string;
