@@ -13,9 +13,8 @@ enum Role {
 }
 
 enum TaskStatus {
-  TODO
-  IN_PROGRESS
-  IN_REVIEW
+  PENDING
+  PROCESSING
   DONE
 }
 
@@ -45,9 +44,7 @@ model Task {
   id          String       @id @default(uuid())
   title       String
   description String       @default("")
-  status      TaskStatus   @default(TODO)
-  priority    TaskPriority @default(MEDIUM)
-  dueDate     DateTime?    @map("due_date")
+  status      TaskStatus   @default(PENDING)
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
 
