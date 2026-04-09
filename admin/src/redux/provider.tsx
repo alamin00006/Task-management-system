@@ -8,7 +8,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        {/* <AuthBootstrap /> */}
         {children}
       </PersistGate>
     </Provider>

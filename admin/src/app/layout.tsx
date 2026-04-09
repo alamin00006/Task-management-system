@@ -6,7 +6,7 @@ import Providers from "@/redux/provider";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "Sera-gari Admin",
+  title: "Task Management",
   description: "Admin dashboard",
 };
 

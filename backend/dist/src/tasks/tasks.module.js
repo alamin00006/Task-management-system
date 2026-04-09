@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TasksModule = void 0;
 const common_1 = require("@nestjs/common");
-const tasks_service_1 = require("./tasks.service");
+const tasks_service_1 = require("../modules/tasks/tasks.service");
 const tasks_controller_1 = require("./tasks.controller");
 const prisma_error_utils_1 = require("../prisma/prisma-error.utils");
 let TasksModule = class TasksModule {

@@ -27,7 +27,7 @@ export const menuSections: { items: MenuItem[] }[] = [
       {
         label: "Audit Logs",
         icon: "shield",
-        href: "/dashboard/logs",
+        href: "/dashboard/audit-logs",
         role: "admin",
       },
 

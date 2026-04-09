@@ -1,17 +1,8 @@
 import { baseApi } from "./baseApi";
 
-export type AuditItem = {
-  id: string;
-  timestamp: string;
-  userId: string;
-  userName: string;
-  action: string;
-  entity: string;
-  entityId: string;
-  before: Record<string, any> | null;
-  after: Record<string, any> | null;
-  details: string;
-};
+import { AuditLog } from "@/types/audit";
+
+export type AuditItem = AuditLog;
 
 export type AuditMeta = {
   total: number;
@@ -21,7 +12,7 @@ export type AuditMeta = {
 };
 
 export type AuditResponse = {
-  data: AuditItem[];
+  data: AuditLog[];
   meta: AuditMeta;
 };
 

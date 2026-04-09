@@ -9,10 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_module_1 = require("./prisma/prisma.module");
-const auth_module_1 = require("./auth/auth.module");
-const users_module_1 = require("./users/users.module");
-const tasks_module_1 = require("./tasks/tasks.module");
-const audit_module_1 = require("./audit/audit.module");
+const users_module_1 = require("./modules/users/users.module");
+const tasks_module_1 = require("./modules/tasks/tasks.module");
+const audit_module_1 = require("./modules/audit/audit.module");
+const auth_module_1 = require("./modules/auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;

@@ -14,7 +14,7 @@ const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
 const prisma_service_1 = require("../prisma/prisma.service");
 const prisma_error_utils_1 = require("../prisma/prisma-error.utils");
-const audit_service_1 = require("../audit/audit.service");
+const audit_service_1 = require("../modules/audit/audit.service");
 const STATUS_MAP = {
     Pending: client_1.TaskStatus.PENDING,
     Processing: client_1.TaskStatus.PROCESSING,
@@ -49,6 +49,7 @@ function formatTask(task) {
             : null,
         createdAt: task.createdAt.toISOString(),
         createdBy: task.createdById,
+        updatedAt: task.updatedAt,
     };
 }
 let TasksService = class TasksService {

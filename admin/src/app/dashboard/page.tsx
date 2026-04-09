@@ -1,8 +1,8 @@
 import { DashboardHeader } from "@/components/layout/DashboardHeader";
-import AllTask from "@/components/allTask/AllTask";
+import AllTask from "@/components/tasks/AllTask";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
-export default function Page() {
+export default function Dashboard() {
   return (
     <ProtectedRoute requiredRole="admin">
       <div className="space-y-6">

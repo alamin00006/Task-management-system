@@ -1,16 +1,7 @@
+import { TaskItem } from "@/types/task";
 import { baseApi } from "./baseApi";
 
 /* ================= TYPES ================= */
-
-export type TaskItem = {
-  id: string;
-  title: string;
-  description: string;
-  status: string;
-  assigneeId: string;
-  createdAt: string;
-  createdBy: string;
-};
 
 export type PaginationMeta = {
   total: number;
