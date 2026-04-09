@@ -1,18 +1,18 @@
-# Task Management System
+# 🧩 Task Management System
 
 A simple and scalable Task Management System built as part of a hiring assignment.
 The system focuses on **clean architecture, role-based access control, and audit logging**.
 
 ---
 
-## Tech Stack
+## 🚀 Tech Stack
 
 **Frontend**
 
 - Next.js
 - TypeScript
 - Tailwind CSS
-- Shadcn
+- shadcn/ui
 
 **Backend**
 
@@ -27,16 +27,16 @@ The system focuses on **clean architecture, role-based access control, and audit
 
 ---
 
-## Features
+## ✨ Features
 
-### Authentication
+### 🔐 Authentication
 
 - JWT-based authentication
 - Predefined users (Admin & User)
 
 ---
 
-### User Roles
+### 👤 User Roles
 
 #### Admin
 
@@ -53,7 +53,7 @@ The system focuses on **clean architecture, role-based access control, and audit
 
 ---
 
-### Task Management
+### 📋 Task Management
 
 Each task contains:
 
@@ -65,7 +65,7 @@ Each task contains:
 
 ---
 
-### Audit Logging (Core Feature)
+### 📊 Audit Logging (Core Feature)
 
 All important actions are logged:
 
@@ -84,7 +84,7 @@ Each log includes:
 
 ---
 
-## Architecture Overview
+## 🏗️ Architecture Overview
 
 - Auth Module → Authentication & authorization
 - User Module → User & role management
@@ -92,10 +92,11 @@ Each log includes:
 - AuditLog Module → Tracks system actions
 
 Audit logging is implemented at the **service layer** to ensure all business actions are captured.
+This approach ensures all business logic actions are consistently tracked without duplicating logging logic.
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
 **Tables:**
 
@@ -112,9 +113,9 @@ Audit logging is implemented at the **service layer** to ensure all business act
 
 ---
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
-### Run with Docker
+### 🐳 Run with Docker
 
 ```bash
 docker compose up --build
@@ -122,7 +123,14 @@ docker compose up --build
 
 ---
 
-### Manual Setup
+## 🌐 Application URLs
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:5000/api/v1
+
+---
+
+### 🔧 Manual Setup
 
 #### Backend
 
@@ -142,7 +150,7 @@ npm run dev
 
 ---
 
-## Demo Credentials
+## 🔑 Demo Credentials
 
 ### Admin
 
@@ -160,13 +168,13 @@ password: password123
 
 ---
 
-## Demo Video
+## 🎥 Video
 
-👉 [https://drive.google.com/file/d/1CeaPHpdp1uiCgE_FJ0frPZVsgP-tfnd4/view?usp=sharing]
+👉 [Watch Video](https://drive.google.com/file/d/1CeaPHpdp1uiCgE_FJ0frPZVsgP-tfnd4/view?usp=sharing)
 
 ---
 
-## API Overview
+## 📦 API Overview
 
 - POST /auth/login
 - GET /tasks
@@ -177,7 +185,7 @@ password: password123
 
 ---
 
-## AI Usage
+## 🤖 AI Usage
 
 AI tools were used selectively to assist development, mainly for **architecture validation, audit logging design, and code refinement**.
 
@@ -234,13 +242,13 @@ Used to:
 
 ---
 
-### Note
+### 📌 Note
 
 All AI-generated outputs were **reviewed, modified, and adapted manually** to meet project requirements.
 
 ---
 
-## Key Decisions
+## 📌 Key Decisions
 
 - Kept architecture simple and modular
 - Focused on audit logging (core requirement)
@@ -251,13 +259,13 @@ All AI-generated outputs were **reviewed, modified, and adapted manually** to me
 
 ## 📎 Submission
 
-- GitHub Repository: [Add your repo link]
+- GitHub Repository: [View Source Code](https://github.com/alamin00006/Task-management-system)
 - Docker Setup: Included
 - Demo Credentials: Provided
 - Demo Video: Included
 
 ---
 
-## Final Note
+## 🙌 Final Note
 
 This project focuses on **clarity, maintainability, and proper architecture decisions** rather than feature overload.
