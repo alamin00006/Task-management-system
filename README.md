@@ -150,7 +150,7 @@ npm run dev
 
 ---
 
-## 🔑 Demo Credentials
+## 🔑 Credentials
 
 ### Admin
 
