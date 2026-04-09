@@ -20,17 +20,28 @@ async function main() {
     });
 
     const user1 = await tx.user.upsert({
-      where: { email: "user@alamin.com" },
+      where: { email: "user1@alamin.com" },
       update: {},
       create: {
-        name: "Developer",
-        email: "user@alamin.com",
+        name: "Developer One",
+        email: "user1@alamin.com",
         password,
         role: Role.USER,
       },
     });
 
-    // Tasks (no hardcoded IDs)
+    const user2 = await tx.user.upsert({
+      where: { email: "user2@alamin.com" },
+      update: {},
+      create: {
+        name: "Developer Two",
+        email: "user2@alamin.com",
+        password,
+        role: Role.USER,
+      },
+    });
+
+    // Tasks
     const task1 = await tx.task.create({
       data: {
         title: "Setup CI/CD Pipeline",
@@ -42,12 +53,12 @@ async function main() {
       },
     });
 
-    const task3 = await tx.task.create({
+    const task2 = await tx.task.create({
       data: {
         title: "Write API Documentation",
         description: "Document all REST endpoints with examples",
         status: TaskStatus.PENDING,
-        assigneeId: user1.id,
+        assigneeId: user2.id,
         createdById: admin.id,
       },
     });
@@ -58,7 +69,6 @@ async function main() {
     if (existingLogs === 0) {
       await tx.auditLog.createMany({
         data: [
-          // Task 1 created (correct status)
           {
             action: "TASK_CREATED",
             entity: "TASK",
@@ -73,8 +83,6 @@ async function main() {
             userId: admin.id,
             taskId: task1.id,
           },
-
-          // Task 1 status already PROCESSING (no mismatch now)
           {
             action: "STATUS_CHANGED",
             entity: "TASK",
@@ -84,29 +92,27 @@ async function main() {
             userId: admin.id,
             taskId: task1.id,
           },
-
-          // Task 2 created
           {
             action: "TASK_CREATED",
             entity: "TASK",
-            entityId: task3.id,
+            entityId: task2.id,
             before: Prisma.JsonNull,
             after: {
-              title: task3.title,
+              title: task2.title,
               status: "PENDING",
-              assigneeId: user1.id,
+              assigneeId: user2.id,
               createdById: admin.id,
             },
             userId: admin.id,
-            taskId: task3.id,
+            taskId: task2.id,
           },
         ],
       });
     }
 
-    console.log(" Seeded successfully:", {
+    console.log("Seeded successfully:", {
       admin: admin.email,
-      users: [user1.email],
+      users: [user1.email, user2.email],
     });
   });
 }

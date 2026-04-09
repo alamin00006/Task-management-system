@@ -87,7 +87,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
     setExpandedItems((prev) =>
       prev.includes(label)
         ? prev.filter((item) => item !== label)
-        : [...prev, label],
+        : [...prev, label]
     );
   };
 
@@ -115,7 +115,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
                   !query || subItem.label.toLowerCase().includes(query);
 
                 return roleMatched && searchMatched;
-              },
+              }
             );
 
             const parentMatchesSearch =
@@ -151,7 +151,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
             onClick={() => toggleExpanded(item.label)}
             className={cn(
               "w-full flex items-center gap-3 px-3 py-2 rounded-md text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors",
-              collapsedView && "justify-center",
+              collapsedView && "justify-center"
             )}
           >
             <Icon className="h-4 w-4 shrink-0" />
@@ -178,7 +178,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
                   className={cn(
                     "block px-3 py-1.5 rounded-md text-sm text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors",
                     isPathActive(pathname, subItem.href) &&
-                      "bg-sidebar-accent text-sidebar-foreground",
+                      "bg-sidebar-accent text-sidebar-foreground"
                   )}
                 >
                   {subItem.label}
@@ -197,7 +197,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
         className={cn(
           "w-full flex items-center gap-3 px-3 py-2 rounded-md text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors",
           collapsedView && "justify-center",
-          isActive && "bg-sidebar-accent text-sidebar-foreground",
+          isActive && "bg-sidebar-accent text-sidebar-foreground"
         )}
       >
         <Icon className="h-4 w-4 shrink-0" />
@@ -218,13 +218,13 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
         <aside
           className={cn(
             "fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-sidebar text-sidebar-foreground transition-transform duration-300",
-            collapsed ? "-translate-x-full" : "translate-x-0",
+            collapsed ? "-translate-x-full" : "translate-x-0"
           )}
         >
           <div className="flex items-center justify-between p-3">
             <div className="flex items-center gap-2">
               <span className="text-sm font-bold">
-                <span className="text-primary">Sera</span>gari
+                <span className="text-primary">Task</span>Management
               </span>
             </div>
 
@@ -245,7 +245,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
                 className={cn(
                   "flex items-center gap-3 rounded-md bg-sidebar-primary px-3 py-2.5 font-medium text-sidebar-primary-foreground",
                   isPathActive(pathname, "/dashboard") &&
-                    "bg-sidebar-accent text-sidebar-foreground",
+                    "bg-sidebar-accent text-sidebar-foreground"
                 )}
               >
                 <LayoutDashboard className="h-5 w-5 shrink-0" />
@@ -296,13 +296,13 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
     <aside
       className={cn(
         "hidden h-screen flex-col bg-sidebar pt-3 text-sidebar-foreground transition-all duration-300 lg:flex",
-        collapsed ? "w-16" : "w-64",
+        collapsed ? "w-16" : "w-64"
       )}
     >
       {!collapsed && (
         <div className="flex items-center justify-center gap-2 pt-5 pb-8">
           <span className="text-xl font-bold">
-            <span className="text-primary">Task</span>Management
+            <span className="text-primary">Task</span> Management
           </span>
         </div>
       )}
@@ -315,7 +315,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
               "flex items-center gap-3 rounded-md bg-sidebar-primary px-3 py-2.5 font-medium text-sidebar-primary-foreground",
               collapsed && "justify-center",
               isPathActive(pathname, "/dashboard") &&
-                "bg-sidebar-accent text-sidebar-foreground",
+                "bg-sidebar-accent text-sidebar-foreground"
             )}
           >
             <LayoutDashboard className="h-5 w-5 shrink-0" />
@@ -339,7 +339,7 @@ export function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
       <div
         className={cn(
           "border-t border-sidebar-border p-3",
-          collapsed && "px-2",
+          collapsed && "px-2"
         )}
       ></div>
     </aside>

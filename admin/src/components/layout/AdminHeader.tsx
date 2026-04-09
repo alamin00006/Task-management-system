@@ -1,7 +1,6 @@
 "use client";
 
 import { ChevronDown, Menu, LogOut, User } from "lucide-react";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
